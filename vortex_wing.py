@@ -36,6 +36,9 @@ class Player(Entity):
         self.hp_text = Text(text=f'HP: {self.hp}', position=(-0.85, 0.45), scale=2, color=color.green)
         self.score_text = Text(text=f'SCORE: {self.score}', position=(0.6, 0.45), scale=2, color=color.white)
         self.game_over_text = Text(text='GAME OVER\nPress R to Restart', position=(0, 0), origin=(0,0), scale=3, color=color.red, enabled=False)
+        
+        # 画面中央の照準器（クロスヘア）
+        self.crosshair = Text(text='+', position=(0, 0), origin=(0,0), scale=2, color=color.green)
 
     def update(self):
         if self.hp <= 0:
@@ -108,6 +111,7 @@ class Player(Entity):
             
             if self.hp <= 0:
                 self.game_over_text.enabled = True
+                self.crosshair.enabled = False
                 self.color = color.gray
                 self.hp_text.color = color.red
 
@@ -278,6 +282,7 @@ def restart_game():
     player.hp_text.color = color.green
     player.color = color.azure
     player.game_over_text.enabled = False
+    player.crosshair.enabled = True
 
 # --- シーンの初期化 ---
 
